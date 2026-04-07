@@ -5,7 +5,6 @@ import { tokenGenrate } from "../../helpers/tokenGenrate";
 import { admin } from "../../entities/admin";
 import path from "node:path";
 import fs from "node:fs"
-import { Op } from "sequelize";
 import { Not } from "typeorm";
 export const adminRegister =async (req:Request,res:Response)=>{
     const {name,email,password="Test@1234",mobile}= req.body;
@@ -116,4 +115,20 @@ export const updateAdminProfile =async (req:any,res:any)=>{
  }catch(err:any){
     return  createResponse(res,false,500,err.message,[],true)
  }
+}
+export const updateAdminPassword = async (req:any,res:any)=>{
+   const admin_id = req.user.id;
+   const {oldPassword,newPassword} = req.body;
+
+   const isExist = await admin.findOne({where:{id:admin_id}});
+   if(!isExist) return createResponse(res,false,404,"Admin Not Found",[],true)
+
+   if(!oldPassword||!newPassword) return createResponse(res,false,400,"All Field Are Required",[],true);
+   const isMatch = await bcrypt.compare(oldPassword,isExist.password);
+
+   if(!isMatch) return createResponse(res,false,400,"Old Password is Incorrect",[],true);
+    const hashPassword = await bcrypt.hash(newPassword,10);
+     isExist.password = hashPassword
+     const result =await isExist.save();
+    return createResponse(res,false,200,"Password Changed Successfully",result,true)
 }

@@ -37,5 +37,5 @@ export const userLogin=async (req:Request,res:Response)=>{
     }catch(err){
        return  createResponse(res,false,500,"Internal Srever Error",[],true)
     }
-   }
+}
    
