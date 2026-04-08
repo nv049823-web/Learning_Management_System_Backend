@@ -18,9 +18,16 @@ export const sendEmail = async(to:string,subject:string,html:string)=>{
             subject:subject,
             html:html       
         })
-        return res;
-    }catch(err){
+        return {
+            result:res,
+            success:true
+        }
+            
+        }catch(err){
         console.log("Email Sending Error:",err)
-        return  `Email Sending Error:${err}`
+        return  {
+            Email_sending_Error:err,
+            success:false
+        }
     }
 }

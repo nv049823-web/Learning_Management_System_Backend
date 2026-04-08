@@ -5,6 +5,8 @@ import { createMasterCourse, deleteMasterCourse, getMasterCourse, updateMasterCo
 import { adminmanageDeleteUser, getUser, getUserDetail } from "../../controller/adminController/adminUserManageController";
 import { getDashboardStats } from "../../controller/adminController/getDashboardStats";
 import { verifyToken } from "../../middleware/authMiddleWare";
+import { adminResetPassword, adminSendOtp } from "../../controller/adminController/adminForgetPasswordController";
+import { adminGlobalSearch } from "../../controller/adminController/globalSearchControllers";
 export const adminRouter=express.Router();
 adminRouter.post("/admin-resiter",adminRegister)
 adminRouter.post("/admin-login",adminLogin)
@@ -31,3 +33,11 @@ adminRouter.get("/user-details/:id",getUserDetail)
 adminRouter.delete("/delete-user/:id",verifyToken,adminmanageDeleteUser)
 //dashboard
 adminRouter.get("/get-dashboard",verifyToken,getDashboardStats)
+
+//forgetPassword  admin
+adminRouter.post("/admin-send-otp",adminSendOtp);
+adminRouter.post("/admin-verify-otp",adminResetPassword);
+
+// search data
+adminRouter.get("/admin-search",verifyToken,adminGlobalSearch)
+

@@ -25,6 +25,9 @@ adress:any
 @Column({name:"otp",type:"varchar",nullable:true})
 otp:any
 
+@Column({name:"otp_expiry",type:"timestamp",nullable:true})
+otp_expiry:any
+
 @Column({name:"status",type:"int",default:1})
 status:any
 
