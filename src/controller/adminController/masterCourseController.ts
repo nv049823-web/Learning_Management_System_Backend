@@ -9,10 +9,11 @@ export const createMasterCourse =async (req:any,res:any)=>{
       return createResponse(res,false,404,"Thumbnail And content required",[],true)
    }
    const thumbnail = req.files.thumbnail;
+   console.log(thumbnail)
    let thumbnailName = thumbnail.name;
    const content = req.files.content;
    let contentName = content.name;
-   const {title,desc,level,rating,duration,type,status,price,offer}=req.body;
+   const {title,desc,level,rating,duration,type,status}=req.body;
     try{
     const isExist = await mastercourse.findOne({where:{title}});
  if(isExist){
@@ -34,7 +35,7 @@ export const createMasterCourse =async (req:any,res:any)=>{
    content.mv("uploads/content/" + contentName, (err:any) => {
       if (err) return createResponse(res,false,500,err,[],true)
       })
- const result = await mastercourse.save( {title,desc,level,rating,duration,type,status,price,offer,thumbnail:thumbnailName,content:contentName});
+ const result = await mastercourse.save( {title,desc,level,rating,duration,type,status,thumbnail:thumbnailName,content:contentName});
   return  createResponse(res,true,200,"Course created Successfully",result,false)
 
  }

@@ -11,6 +11,5 @@ export const AppdataSoucre=new DataSource({
     entities:["src/entities/**/*.ts"],
     migrations:["src/entities/migration/**/*.ts"],
     subscribers:["src/entities/subcribres/**/*.ts"],
-
 }
 )

@@ -22,11 +22,7 @@ content:any
 @Column({name:"rating",type:"int",default:1})
 rating:any
 
-@Column({name:"price",type:"int",default:0})
-price:any
 
-@Column({name:"offer",type:"int",default:0})
-offer:any
 
 @Column({name:"duration",type:"int",default:1})
 duration:any

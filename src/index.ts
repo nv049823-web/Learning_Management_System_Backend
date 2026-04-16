@@ -12,8 +12,6 @@ app.use(fileupload())
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 AppdataSoucre.initialize().then(()=>{
     console.log("Db connect")
-   
-
 }).catch((err)=>{
     console.log("Db not connect",err)
 
